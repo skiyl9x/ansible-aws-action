@@ -1,0 +1,17 @@
+name: "Ansible with AWS"
+description: "Authenticates on AWS and executes Ansible commands."
+branding:
+  icon: 'anchor'  
+  color: 'green'
+inputs:
+  command:
+    description: "Your command (ansible-playbook ...)"
+    required: true
+outputs:
+  result:
+    description: "Output returned by your Ansible command"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.command }}
