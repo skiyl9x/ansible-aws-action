@@ -75,21 +75,4 @@ Use the output of your command in later steps
 
 ```
 
-# Secrets
 
-Create a GitHub Secret for each of the following values:
-
-* `KUBE_CONFIG_DATA`
-Your kube config file in base64-encrypted form. You can do that with
-
-```
-cat $HOME/.kube/config | base64
-```
-
-* `AWS_ACCESS_KEY_ID`
-
-* `AWS_SECRET_ACCESS_KEY`
-
-# Contributions
-
-Pull requests, issues or feedback of any kind are more than welcome by anyone!
