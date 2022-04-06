@@ -48,12 +48,9 @@ jobs:
           aws-region: us-east-1
 
       - name: helm deploy
-        uses: koslib/helm-eks-action@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        uses: skiyl9x/ansible-aws-action@main
         with:
-          plugins: "https://github.com/jkroepke/helm-secrets" # optional
-          command: helm upgrade <release name> --install --wait <chart> -f <path to values.yaml>
+          command: ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i inventory.yaml --extra-vars='ansible_become_pass=user proxy_pass=pass proxy_user=user ansible_ssh_private_key_file=path/to/private_key ansible_user=user'
 ```
 
 # Response
@@ -75,21 +72,4 @@ Use the output of your command in later steps
 
 ```
 
-# Secrets
 
-Create a GitHub Secret for each of the following values:
-
-* `KUBE_CONFIG_DATA`
-Your kube config file in base64-encrypted form. You can do that with
-
-```
-cat $HOME/.kube/config | base64
-```
-
-* `AWS_ACCESS_KEY_ID`
-
-* `AWS_SECRET_ACCESS_KEY`
-
-# Contributions
-
-Pull requests, issues or feedback of any kind are more than welcome by anyone!
