@@ -48,12 +48,9 @@ jobs:
           aws-region: us-east-1
 
       - name: helm deploy
-        uses: koslib/helm-eks-action@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        uses: skiyl9x/ansible-aws-action@main
         with:
-          plugins: "https://github.com/jkroepke/helm-secrets" # optional
-          command: helm upgrade <release name> --install --wait <chart> -f <path to values.yaml>
+          command: ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i inventory.yaml --extra-vars='ansible_become_pass=user proxy_pass=pass proxy_user=user ansible_ssh_private_key_file=path/to/private_key ansible_user=user'
 ```
 
 # Response
